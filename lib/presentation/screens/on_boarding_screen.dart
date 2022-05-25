@@ -10,22 +10,35 @@ class OnBoardingScreen extends StatelessWidget {
         title: Text('on Bourding widget'),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          PageView.builder(
+          SizedBox(
+            width: double.infinity,
+            height: 300,
+            child: PageView(
+              children: [
+                Image.asset(
+                  'assets/images/onboarding1.png',
+                  width: 100,
+                ),
+                Text(
+                  'on Boarding num 1 ',
+                ),
+              ],
+            ),
+          ),
+          // PageView.builder(
 
-              //controller: ,
-              //onPageChanged: ,
-              //itemCount: ,
-              reverse: true,
-              itemBuilder: (context, index) {
-                return Text('');
-              }),
+          //     //controller: ,
+          //     //onPageChanged: ,
+          //     //itemCount: ,
+          //     reverse: true,
+          //     itemBuilder: (context, index) {
+          //       return Text('hey i`m a page view');
+          //     }),
 //image for each page
 
-          // Image.asset('name'),
-
           //text for each page
-          Text('on Boarding num 1 '),
 
 //indicator
         ],
