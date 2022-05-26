@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import 'presentation/screens/on_boarding_screen.dart';
 
@@ -11,11 +12,13 @@ class MansourShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const OnBoardingScreen(),
+    return Sizer(
+      builder: ((context, orientation, deviceType) => MaterialApp(
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: OnBoardingScreen(),
+          )),
     );
   }
 }
