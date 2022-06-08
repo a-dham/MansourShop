@@ -27,7 +27,7 @@ class StoreCubit extends Cubit<StoreState> {
         )
         .then((value) => {
               emit(StoreLoginSuccessState()),
-              print(value?.data.toString()),
+              print(value?.data),
             })
         .catchError((error) {
           print(error);
@@ -51,6 +51,14 @@ class StoreCubit extends Cubit<StoreState> {
         : const Icon(Icons.visibility_off);
     emit(
       StoreVisibilityState(),
+    );
+  }
+
+  bool isDarkMode = false;
+  changethemeMode() {
+    isDarkMode = !isDarkMode;
+    emit(
+      StoreChangeAppTheme(),
     );
   }
 }

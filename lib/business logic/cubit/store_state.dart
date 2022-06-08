@@ -5,8 +5,6 @@ abstract class StoreState {}
 
 class StoreInitial extends StoreState {}
 
-class StoreVisibilityState extends StoreState {}
-
 class StoreLoginLoadingState extends StoreState {}
 
 class StoreLoginSuccessState extends StoreState {}
@@ -16,3 +14,7 @@ class StoreLoginErrorState extends StoreState {
 
   StoreLoginErrorState(this.error);
 }
+
+class StoreVisibilityState extends StoreState {}
+
+class StoreChangeAppTheme extends StoreState {}

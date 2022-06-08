@@ -2,7 +2,9 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansour_shop/app_router.dart';
+import 'package:mansour_shop/business%20logic/cubit/store_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import 'business logic/blocObserver/bloc_observer.dart';
@@ -23,18 +25,28 @@ class MansourShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: ((context, orientation, deviceType) => MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            onGenerateRoute: appRouter.generateRoute,
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              primarySwatch: Colors.grey,
-            ),
-            themeMode: ThemeMode.light,
-          )),
+      builder: (context, orientation, deviceType) => BlocProvider(
+        create: (context) => StoreCubit(),
+        child: BlocConsumer<StoreCubit, StoreState>(
+          listener: (context, satet) {},
+          builder: (context, state) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              onGenerateRoute: appRouter.generateRoute,
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                primarySwatch: Colors.grey,
+              ),
+              themeMode: StoreCubit.get(context).isDarkMode
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+            );
+          },
+        ),
+      ),
     );
   }
 }

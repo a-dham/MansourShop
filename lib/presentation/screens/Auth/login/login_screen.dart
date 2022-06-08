@@ -84,7 +84,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: StoreCubit.get(context).isVisible,
                       ),
-                      onSubmitted: (submit) {},
+                      onSubmitted: (submit) {
+                        if (formKey.currentState!.validate()) {
+                          StoreCubit.get(context).userLogin(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                        }
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter your password';
@@ -96,20 +103,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 3.5.h),
                     Row(
                       children: [
-                        Expanded(
-                          child: CustomElevatedButton(
-                            text: 'Login',
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                StoreCubit.get(context).userLogin(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                );
-
-                                // print(_emailController.text);
-                                // print(_passwordController.text);
-                              }
-                            },
+                        Visibility(
+                          visible:
+                              state == StoreLoginLoadingState() ? true : false,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                        Visibility(
+                          visible:
+                              state == StoreLoginSuccessState() ? false : true,
+                          child: Expanded(
+                            child: CustomElevatedButton(
+                              text: 'Login',
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  StoreCubit.get(context).userLogin(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
+                                }
+                              },
+                            ),
                           ),
                         ),
                       ],
