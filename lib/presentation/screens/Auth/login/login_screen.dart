@@ -28,7 +28,42 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider(
         create: (_) => StoreCubit(),
         child: BlocConsumer<StoreCubit, StoreState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is StoreLoginSuccessState) {
+              if (state.loginModel.status) {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (_) => Container(
+                    margin: EdgeInsets.all(20.w),
+                    height: 10.h,
+                    width: 40.w,
+                    decoration: const BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(state.loginModel.message),
+                  ),
+                );
+              } else {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (_) => Container(
+                    margin:
+                        EdgeInsets.only(right: 10.w, left: 10.w, bottom: 10.h),
+                    height: 10.h,
+                    width: 80.w,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(state.loginModel.message),
+                  ),
+                );
+              }
+            }
+          },
           builder: (context, state) => Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
@@ -103,28 +138,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 3.5.h),
                     Row(
                       children: [
-                        Visibility(
-                          visible:
-                              state == StoreLoginLoadingState() ? true : false,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                        Visibility(
-                          visible:
-                              state == StoreLoginSuccessState() ? false : true,
-                          child: Expanded(
-                            child: CustomElevatedButton(
-                              text: 'Login',
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  StoreCubit.get(context).userLogin(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                  );
-                                }
-                              },
-                            ),
+                        Expanded(
+                          child: CustomElevatedButton(
+                            text: 'Login',
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                StoreCubit.get(context).userLogin(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                              }
+                            },
                           ),
                         ),
                       ],
