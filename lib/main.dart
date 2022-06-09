@@ -1,9 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
 // ignore_for_file: must_be_immutable
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mansour_shop/constant/strings.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:mansour_shop/app_router.dart';
@@ -26,16 +26,38 @@ void main() async {
   await CacheHelper.init();
   bool? isDark = CacheHelper.getData(key: 'isDarkMode');
 
+  String? initPage;
+
+  bool? onboarding = CacheHelper.getData(key: 'onboarding');
+  String? token = CacheHelper.getData(key: 'token');
+
+  if (onboarding != null) {
+    if (token != null) {
+      initPage = home;
+    } else {
+      initPage = login;
+    }
+  } else {
+    initPage = onBoarding;
+  }
+
+  print(initPage);
+  print(onboarding);
+  print(token);
+
   runApp(MansourShop(
     isDark: isDark,
+    initPage: initPage,
   ));
 }
 
 class MansourShop extends StatelessWidget {
   bool? isDark;
+  String? initPage;
   MansourShop({
     Key? key,
     this.isDark,
+    this.initPage,
   }) : super(key: key);
   AppRouter appRouter = AppRouter();
   @override
@@ -55,6 +77,7 @@ class MansourShop extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               onGenerateRoute: appRouter.generateRoute,
+              initialRoute: initPage,
               darkTheme: ThemeData(
                 brightness: Brightness.dark,
                 primarySwatch: Colors.grey,
