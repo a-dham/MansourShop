@@ -57,24 +57,4 @@ class StoreCubit extends Cubit<StoreState> {
       StoreVisibilityState(),
     );
   }
-
-  bool isDarkMode = false;
-  changeThemeMode({bool? fromSharedPreferences}) {
-    if (fromSharedPreferences != null) {
-      isDarkMode = fromSharedPreferences;
-      emit(StoreChangeAppTheme());
-    } else {
-      isDarkMode = !isDarkMode;
-      CacheHelper.saveData(
-        key: 'isDarkMode',
-        value: isDarkMode,
-      ).then(
-        (value) {
-          emit(
-            StoreChangeAppTheme(),
-          );
-        },
-      );
-    }
-  }
 }

@@ -19,5 +19,3 @@ class StoreLoginErrorState extends StoreState {
 }
 
 class StoreVisibilityState extends StoreState {}
-
-class StoreChangeAppTheme extends StoreState {}

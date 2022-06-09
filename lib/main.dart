@@ -3,15 +3,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_cubit.dart';
+import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_states.dart';
 import 'package:mansour_shop/constant/strings.dart';
+import 'package:mansour_shop/constant/theme_app.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:mansour_shop/app_router.dart';
-import 'package:mansour_shop/business%20logic/cubit/store_cubit.dart';
 import 'package:mansour_shop/network/local/cache_helper.dart';
 import 'package:mansour_shop/network/remote/dio_helper.dart';
 
 import 'business logic/blocObserver/bloc_observer.dart';
+import 'business logic/cubit/cubitLogin/store_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,26 +66,26 @@ class MansourShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (context, orientation, deviceType) => BlocProvider(
-        create: (context) => StoreCubit()
-          ..changeThemeMode(
-            fromSharedPreferences: isDark,
+      builder: (context, orientation, deviceType) => MultiBlocProvider(
+        providers: [
+          BlocProvider<StoreCubit>(create: (context) => StoreCubit()),
+          BlocProvider<HomeCubit>(
+            create: (context) => HomeCubit()
+              ..changeThemeMode(
+                fromSharedPreferences: isDark,
+              ),
           ),
-        child: BlocConsumer<StoreCubit, StoreState>(
+        ],
+        child: BlocConsumer<HomeCubit, HomeStates>(
           listener: (context, state) {},
           builder: (context, state) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
+              theme: ThemeApp.lightTheme,
               onGenerateRoute: appRouter.generateRoute,
               initialRoute: initPage,
-              darkTheme: ThemeData(
-                brightness: Brightness.dark,
-                primarySwatch: Colors.grey,
-              ),
-              themeMode: StoreCubit.get(context).isDarkMode
+              darkTheme: ThemeApp.darkTheme,
+              themeMode: HomeCubit.get(context).isDarkMode
                   ? ThemeMode.dark
                   : ThemeMode.light,
             );
