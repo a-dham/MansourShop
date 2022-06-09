@@ -4,6 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansour_shop/business%20logic/cubit/store_cubit.dart';
+import 'package:mansour_shop/constant/strings.dart';
+import 'package:mansour_shop/network/local/cache_helper.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../widgets/custom_elevated_button.dart';
@@ -45,6 +47,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(state.loginModel.message),
                   ),
                 );
+                CacheHelper.saveData(
+                        key: 'token', value: state.loginModel.data!.token)
+                    .then((value) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, home, (route) => false);
+                });
               } else {
                 showModalBottomSheet(
                   context: context,

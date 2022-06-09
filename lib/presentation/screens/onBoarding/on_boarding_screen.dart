@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:mansour_shop/network/local/cache_helper.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -20,7 +21,12 @@ class OnBoardingScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, login);
+              CacheHelper.saveData(key: 'onboarding', value: true)
+                  .then((value) {
+                if (value!) {
+                  Navigator.pushNamed(context, login);
+                }
+              });
             },
             child: Text(
               'Skip',

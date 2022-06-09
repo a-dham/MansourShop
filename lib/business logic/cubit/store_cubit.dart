@@ -1,13 +1,11 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansour_shop/constant/strings.dart';
 import 'package:mansour_shop/data/models/login_model.dart';
 import 'package:mansour_shop/network/local/cache_helper.dart';
 import 'package:mansour_shop/network/remote/dio_helper.dart';
-import 'package:meta/meta.dart';
 
 part 'store_state.dart';
 
@@ -67,7 +65,7 @@ class StoreCubit extends Cubit<StoreState> {
       emit(StoreChangeAppTheme());
     } else {
       isDarkMode = !isDarkMode;
-      CacheHelper.putData(
+      CacheHelper.saveData(
         key: 'isDarkMode',
         value: isDarkMode,
       ).then(
