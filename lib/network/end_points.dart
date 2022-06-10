@@ -1,2 +1,3 @@
-const String baseUrl = "";
-const String login = 'login';
+const String baseUrl = 'https://student.valuxapps.com/api/';
+const String endPointLogin = 'login';
+const String endPointHome = 'home';
