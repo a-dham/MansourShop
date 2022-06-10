@@ -39,3 +39,5 @@ class CacheHelper {
     return await sharedPreferences!.remove(key);
   }
 }
+
+String? token = '';

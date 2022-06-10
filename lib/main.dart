@@ -32,7 +32,7 @@ void main() async {
   String? initPage;
 
   bool? onboarding = CacheHelper.getData(key: 'onboarding');
-  String? token = CacheHelper.getData(key: 'token');
+  token = CacheHelper.getData(key: 'token');
 
   if (onboarding != null) {
     if (token != null) {
@@ -73,7 +73,8 @@ class MansourShop extends StatelessWidget {
             create: (context) => HomeCubit()
               ..changeThemeMode(
                 fromSharedPreferences: isDark,
-              ),
+              )
+              ..homeData(),
           ),
         ],
         child: BlocConsumer<HomeCubit, HomeStates>(

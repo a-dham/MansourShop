@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mansour_shop/network/end_points.dart';
 
 class DioHelper {
   static Dio? dio;
@@ -7,17 +8,22 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://student.valuxapps.com/api/',
-        receiveDataWhenStatusError: true,
-        headers: {'Content-Type': 'application/json'},
+        baseUrl: baseUrl,
       ),
     );
   }
 
-  Future<Response?> getData({
+  static Future<Response?> getData({
     required String url,
-    required Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? queryParameters,
+    String? token,
+    String lang = 'en',
   }) async {
+    dio?.options.headers = {
+      'lang': lang,
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    };
     return await dio?.get(url, queryParameters: queryParameters);
   }
 
@@ -25,10 +31,14 @@ class DioHelper {
     required String url,
     required Map<String, dynamic>? data,
     @required Map<String, dynamic>? queryParameters,
-    String lang = 'ar',
+    String lang = 'en',
     String? token,
   }) async {
-    // dio?.options.headers = {'lang': lang, 'Authorization': token};
+    dio?.options.headers = {
+      'lang': lang,
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    };
 
     return await dio?.post(url, data: data, queryParameters: queryParameters);
   }
