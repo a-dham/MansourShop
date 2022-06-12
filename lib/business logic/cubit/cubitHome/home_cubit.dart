@@ -18,8 +18,9 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitial());
 
   static HomeCubit get(context) => BlocProvider.of(context);
+  HomeModel? homeModel;
 
-  homeData() {
+  getHomeData() async {
     emit(HomeDataLoading());
     DioHelper.getData(
       url: endPointHome,
@@ -28,12 +29,14 @@ class HomeCubit extends Cubit<HomeStates> {
       queryParameters: {},
     ).then(
       (value) {
-        HomeModel homeModel = HomeModel.fromJson(value!.data);
-        print(homeModel.status.toString());
+        homeModel = HomeModel.fromJson(value!.data);
+        CacheHelper.saveData(key: 'homeData', value: homeModel!.data);
+        print(homeModel!.status.toString());
         print("===================================");
-        print(homeModel.data?.products?[0].image.toString());
 
-        emit(HomeDataStateSuccess());
+        emit(HomeDataStateSuccess(
+          dataList: homeModel!.data!.banners,
+        ));
       },
     ).catchError(
       (error) {
@@ -44,7 +47,7 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   List<Widget> bottomNavigationPages = [
-    const ProductsScreen(),
+    ProductsScreen(),
     const CategoriesScreen(),
     const FavouriteScreen(),
     const SettingsScreen(),
@@ -52,9 +55,9 @@ class HomeCubit extends Cubit<HomeStates> {
 
   List<Widget> appBarTitles = [
     const Text('Home'),
-    const Text('categories'),
-    const Text('favourites'),
-    const Text('settings'),
+    const Text('Categories'),
+    const Text('Favourites'),
+    const Text('Settings'),
   ];
 
   int currentIndex = 0;

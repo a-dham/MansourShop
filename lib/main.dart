@@ -7,6 +7,7 @@ import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_cubit.dart';
 import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_states.dart';
 import 'package:mansour_shop/constant/strings.dart';
 import 'package:mansour_shop/constant/theme_app.dart';
+import 'package:mansour_shop/data/models/home_model.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:mansour_shop/app_router.dart';
@@ -27,6 +28,7 @@ void main() async {
 
   DioHelper.init();
   await CacheHelper.init();
+
   bool? isDark = CacheHelper.getData(key: 'isDarkMode');
 
   String? initPage;
@@ -47,6 +49,9 @@ void main() async {
   print(initPage);
   print(onboarding);
   print(token);
+  print('====================================');
+
+  print('====================================');
 
   runApp(MansourShop(
     isDark: isDark,
@@ -74,7 +79,7 @@ class MansourShop extends StatelessWidget {
               ..changeThemeMode(
                 fromSharedPreferences: isDark,
               )
-              ..homeData(),
+              ..getHomeData(),
           ),
         ],
         child: BlocConsumer<HomeCubit, HomeStates>(

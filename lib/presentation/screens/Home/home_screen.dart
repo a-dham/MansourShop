@@ -15,9 +15,13 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         HomeCubit _cubit = HomeCubit.get(context);
         return Scaffold(
+          drawer: Drawer(
+            child: Drawer(),
+          ),
           appBar: AppBar(
             title: _cubit.appBarTitles[_cubit.currentIndex],
-            leading: Text(''),
+            elevation: 0,
+            titleTextStyle: Theme.of(context).textTheme.headline6,
           ),
           body: _cubit.bottomNavigationPages[_cubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
@@ -25,6 +29,13 @@ class HomeScreen extends StatelessWidget {
               onTap: (index) {
                 _cubit.selectPage(index);
               },
+              backgroundColor: Colors.red,
+              selectedIconTheme: Theme.of(context).iconTheme,
+              unselectedIconTheme: Theme.of(context).iconTheme.copyWith(
+                    color: Colors.grey,
+                  ),
+              showSelectedLabels: true,
+              selectedItemColor: Theme.of(context).secondaryHeaderColor,
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(

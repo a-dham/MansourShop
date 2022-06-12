@@ -1,6 +1,12 @@
 class HomeModel {
   bool? status;
   DataModel? data;
+
+  HomeModel({
+    this.status,
+    this.data,
+  });
+
   HomeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = json['data'] != null ? DataModel.fromJson(json['data']) : null;
@@ -8,8 +14,8 @@ class HomeModel {
 }
 
 class DataModel {
-  List<ProductsModel>? products;
-  List<BannersModel>? banners;
+  List<ProductsModel> products = <ProductsModel>[];
+  List<BannersModel> banners = <BannersModel>[];
 
   String? ad;
 
@@ -18,13 +24,13 @@ class DataModel {
         ? (json['banners'] as List)
             .map((i) => BannersModel.fromJson(i))
             .toList()
-        : null;
+        : [];
 
     products = json[products] != null
         ? (json['products'] as List)
             .map((i) => ProductsModel.fromJson(i))
             .toList()
-        : null;
+        : [];
 
     ad = json['ad'];
   }
