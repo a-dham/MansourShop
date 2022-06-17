@@ -7,7 +7,6 @@ import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_cubit.dart';
 import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_states.dart';
 import 'package:mansour_shop/constant/strings.dart';
 import 'package:mansour_shop/constant/theme_app.dart';
-import 'package:mansour_shop/data/models/home_model.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:mansour_shop/app_router.dart';
@@ -79,7 +78,8 @@ class MansourShop extends StatelessWidget {
               ..changeThemeMode(
                 fromSharedPreferences: isDark,
               )
-              ..getHomeData(),
+              ..getHomeData()
+              ..getCategoriesData(),
           ),
         ],
         child: BlocConsumer<HomeCubit, HomeStates>(

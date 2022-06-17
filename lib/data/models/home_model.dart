@@ -26,7 +26,7 @@ class DataModel {
             .toList()
         : [];
 
-    products = json[products] != null
+    products = json["products"] != null
         ? (json['products'] as List)
             .map((i) => ProductsModel.fromJson(i))
             .toList()
@@ -49,9 +49,9 @@ class ProductsModel {
 
   ProductsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    price = json['price'];
+    price = json['price'].toDouble();
     oldPrice = json['old_Price'];
-    discount = json['discount'];
+    discount = json['discount'].toDouble();
     name = json['name'];
     image = json['image'];
     description = json['description'];
