@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:mansour_shop/data/models/categories_model.dart';
 import 'package:mansour_shop/data/models/home_model.dart';
 
 abstract class HomeStates {}
@@ -11,8 +13,17 @@ class ChangeAppTheme extends HomeStates {}
 class HomeDataLoading extends HomeStates {}
 
 class HomeDataStateSuccess extends HomeStates {
-  List<BannersModel> dataList;
-  HomeDataStateSuccess({required this.dataList});
+  final DataModel data;
+  HomeDataStateSuccess({
+    required this.data,
+  });
 }
 
 class HomeDataError extends HomeStates {}
+
+class CategoriesDataStateSuccess extends HomeStates {
+  final CategoriesDataModel data;
+  CategoriesDataStateSuccess({required this.data});
+}
+
+class CategoriesDataError extends HomeStates {}

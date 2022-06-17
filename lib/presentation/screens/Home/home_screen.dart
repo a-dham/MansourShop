@@ -29,13 +29,14 @@ class HomeScreen extends StatelessWidget {
               onTap: (index) {
                 _cubit.selectPage(index);
               },
-              backgroundColor: Colors.red,
               selectedIconTheme: Theme.of(context).iconTheme,
               unselectedIconTheme: Theme.of(context).iconTheme.copyWith(
                     color: Colors.grey,
                   ),
               showSelectedLabels: true,
-              selectedItemColor: Theme.of(context).secondaryHeaderColor,
+              showUnselectedLabels: true,
+              selectedItemColor: Theme.of(context).primaryColor,
+              unselectedItemColor: Colors.grey,
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(

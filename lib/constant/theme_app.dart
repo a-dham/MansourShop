@@ -6,12 +6,13 @@ class ThemeApp {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.blue,
-    secondaryHeaderColor: Colors.blue,
+    secondaryHeaderColor: Colors.black,
     iconTheme: IconThemeData(
       color: kmaincolor,
       size: 20.sp,
     ),
     textTheme: TextTheme(
+      // bodyLarge: textsty,
       headline6: TextStyle(
         fontSize: 15.sp,
         color: Colors.white,
@@ -47,6 +48,10 @@ class ThemeApp {
         fontSize: 5,
         color: Colors.white,
         fontWeight: FontWeight.bold,
+      ),
+      bodyText2: TextStyle(
+        fontSize: 13.sp,
+        color: Colors.black,
       ),
     ),
   );

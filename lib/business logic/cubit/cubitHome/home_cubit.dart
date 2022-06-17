@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_states.dart';
+import 'package:mansour_shop/data/models/categories_model.dart';
 import 'package:mansour_shop/data/models/home_model.dart';
 import 'package:mansour_shop/network/end_points.dart';
 import 'package:mansour_shop/network/remote/dio_helper.dart';
@@ -35,7 +36,7 @@ class HomeCubit extends Cubit<HomeStates> {
         print("===================================");
 
         emit(HomeDataStateSuccess(
-          dataList: homeModel!.data!.banners,
+          data: homeModel!.data!,
         ));
       },
     ).catchError(
@@ -44,6 +45,29 @@ class HomeCubit extends Cubit<HomeStates> {
         emit(HomeDataError());
       },
     );
+  }
+
+  CategoriesModel? categoriesModel;
+  getCategoriesData() {
+    emit(HomeDataLoading());
+
+    DioHelper.getData(
+      url: endPointCategories,
+    ).then(
+      (value) {
+        print('get categories model');
+
+        categoriesModel = CategoriesModel.fromJson(value!.data);
+        emit(CategoriesDataStateSuccess(
+          data: categoriesModel!.data!,
+        ));
+      },
+    ).catchError((error) {
+      print(
+        error.toString(),
+      );
+      emit(CategoriesDataError());
+    });
   }
 
   List<Widget> bottomNavigationPages = [
