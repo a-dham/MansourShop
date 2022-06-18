@@ -48,9 +48,6 @@ void main() async {
   print(initPage);
   print(onboarding);
   print(token);
-  print('====================================');
-
-  print('====================================');
 
   runApp(MansourShop(
     isDark: isDark,
@@ -79,7 +76,8 @@ class MansourShop extends StatelessWidget {
                 fromSharedPreferences: isDark,
               )
               ..getHomeData()
-              ..getCategoriesData(),
+              ..getCategoriesData()
+              ..getFavourite(),
           ),
         ],
         child: BlocConsumer<HomeCubit, HomeStates>(

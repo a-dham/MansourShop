@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:mansour_shop/data/models/categories_model.dart';
+import 'package:mansour_shop/data/models/favourites_model.dart';
 import 'package:mansour_shop/data/models/home_model.dart';
 
 abstract class HomeStates {}
@@ -27,3 +28,17 @@ class CategoriesDataStateSuccess extends HomeStates {
 }
 
 class CategoriesDataError extends HomeStates {}
+
+class IsFavouritesState extends HomeStates {}
+
+class FavouritesStateSuccess extends HomeStates {}
+
+class ChangeFavouritesColorState extends HomeStates {}
+
+class FavouritesStateError extends HomeStates {}
+
+class GetFavouritesStateLoading extends HomeStates {}
+
+class GetFavouritesStateSuccess extends HomeStates {}
+
+class GetFavouritesStateError extends HomeStates {}
