@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_cubit.dart';
+import 'package:mansour_shop/constant/strings.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../data/models/home_model.dart';
@@ -36,13 +38,11 @@ class Products extends StatelessWidget {
                         alignment: AlignmentDirectional.bottomStart,
                         children: [
                           Center(
-                            child: SizedBox(
+                            child: Image.network(
+                              productsList[index].image ?? '',
+                              fit: BoxFit.contain,
                               height: 22.h,
-                              width: 30.w,
-                              child: Image.network(
-                                productsList[index].image ?? '',
-                                fit: BoxFit.contain,
-                              ),
+                              width: 40.w,
                             ),
                           ),
                           productsList[index].discount != 0
@@ -100,9 +100,22 @@ class Products extends StatelessWidget {
                                 // ),
                                 const Spacer(),
                                 IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.favorite_outline,
+                                  onPressed: () {
+                                    HomeCubit.get(context)
+                                        .isFavourite(productsList[index].id!);
+                                  },
+                                  icon: CircleAvatar(
+                                    backgroundColor:
+                                        HomeCubit.get(context).favouritesMap![
+                                                productsList[index].id]!
+                                            ? Colors.red
+                                            : Colors.grey,
+                                    radius: 20,
+                                    child: const Icon(
+                                      Icons.favorite_outline,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ],

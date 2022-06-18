@@ -55,8 +55,8 @@ class ProductsModel {
     name = json['name'];
     image = json['image'];
     description = json['description'];
-    isFavorite = json['is_Favorite'];
-    isCart = json['is_Cart'];
+    isFavorite = json['in_favorites'];
+    isCart = json['in_cart'];
   }
 }
 
