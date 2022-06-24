@@ -21,7 +21,7 @@ class AppRouter {
 
     switch (settings.name) {
       case register:
-        return MaterialPageRoute(builder: (_) => const SignUPScreen());
+        return MaterialPageRoute(builder: (_) =>  SignUPScreen());
     }
     switch (settings.name) {
       case home:

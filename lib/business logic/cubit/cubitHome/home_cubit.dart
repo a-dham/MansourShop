@@ -126,8 +126,8 @@ class HomeCubit extends Cubit<HomeStates> {
 
   List<Widget> bottomNavigationPages = [
     ProductsScreen(),
-    CategoriesScreen(),
-    FavouriteScreen(),
+    const CategoriesScreen(),
+    const FavouriteScreen(),
     const SettingsScreen(),
   ];
 

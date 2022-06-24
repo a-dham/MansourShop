@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mansour_shop/business%20logic/cubit/cubitHome/home_cubit.dart';
-import 'package:mansour_shop/constant/strings.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../data/models/home_model.dart';

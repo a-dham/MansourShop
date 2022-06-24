@@ -83,7 +83,10 @@ class MansourShop extends StatelessWidget {
         child: BlocConsumer<HomeCubit, HomeStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            // SizeConfig().init(context);
+
             return MaterialApp(
+
               debugShowCheckedModeBanner: false,
               theme: ThemeApp.lightTheme,
               onGenerateRoute: appRouter.generateRoute,
