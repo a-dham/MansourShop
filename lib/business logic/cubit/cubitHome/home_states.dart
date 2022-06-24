@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:mansour_shop/data/models/categories_model.dart';
-import 'package:mansour_shop/data/models/favourites_model.dart';
 import 'package:mansour_shop/data/models/home_model.dart';
 
 abstract class HomeStates {}

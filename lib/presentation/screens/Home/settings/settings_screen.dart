@@ -31,6 +31,7 @@ class SettingsScreen extends StatelessWidget {
                   child: const Text('logout'),
                 ),
               ),
+
             ],
           ),
         );

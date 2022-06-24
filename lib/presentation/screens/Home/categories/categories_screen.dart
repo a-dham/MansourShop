@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../data/models/categories_model.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  CategoriesScreen({Key? key}) : super(key: key);
+  const CategoriesScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
